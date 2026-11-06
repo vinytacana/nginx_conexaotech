@@ -4,6 +4,14 @@ Projeto de estudo do curso Conexão Tech para praticar Docker Compose, proxy rev
 
 ## Arquitetura
 
+### Arquitetura inicial
+
+![Arquitetura inicial: Nginx nas portas 80 e 443 encaminhando requisições para Node.js e Flask na rede frontend](docs/images/arquitetura-inicial.png)
+
+### Arquitetura final
+
+![Arquitetura final: domínios no /etc/hosts, proxy reverso HTTPS e balanceamento entre Node 1 e Node 2, além da aplicação Flask](docs/images/arquitetura-final.png)
+
 O ambiente tem quatro contêineres na rede bridge `frontend`:
 
 | Serviço | Porta no contêiner | Função |
