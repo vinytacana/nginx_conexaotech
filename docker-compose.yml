@@ -3,9 +3,10 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./arquivos/nginx_files/nginx/:/etc/nginx/
-      - ./arquivos/nginx_files/certs/server.crt:/etc/ssl/certs/server.crt
-      - ./arquivos/nginx_files/certs/server.key:/etc/ssl/certs/server.key
+      # Z ajusta o rótulo SELinux a cada recriação do contêiner.
+      - ./arquivos/nginx_files/nginx/:/etc/nginx/:ro,Z
+      - ./arquivos/nginx_files/certs/server.crt:/etc/ssl/certs/server.crt:ro,Z
+      - ./arquivos/nginx_files/certs/server.key:/etc/ssl/certs/server.key:ro,Z
     ports:
       - 80:80
       - 443:443
@@ -17,6 +18,10 @@ services:
   # Container Node
   node:
     build: ./arquivos/node_app/
+    networks:
+      - frontend
+  node2:
+    build: ./arquivos/node_app2/
     networks:
       - frontend
   # Container Python
